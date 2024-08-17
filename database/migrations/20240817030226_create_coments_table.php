@@ -24,7 +24,8 @@ final class CreateComentsTable extends AbstractMigration
             ->addColumn('user_id', 'integer', ["signed" => false])
             ->addColumn('comment', 'text')
             ->addColumn('rating', 'integer', ['limit' => 1, 'null' => false]) // rating entre 1 y 5
-            ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addTimestamps()
+            ->addColumn('deleted_at', 'timestamp', ['null' => true, 'default' => null])
             ->addForeignKey('event_id', 'events', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
             ->addForeignKey('user_id', 'users', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
             ->create();

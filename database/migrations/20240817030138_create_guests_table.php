@@ -24,6 +24,8 @@ final class CreateGuestsTable extends AbstractMigration
             ->addColumn('user_id', 'integer', ["signed" => false])
             ->addColumn('rsvp_status', 'enum', ['values' => ['pending', 'confirmed', 'declined'], 'default' => 'pending'])
             ->addColumn('invited_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addTimestamps()
+            ->addColumn('deleted_at', 'timestamp', ['null' => true, 'default' => null])
             ->addForeignKey('event_id', 'events', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
             ->addForeignKey('user_id', 'users', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
             ->create();

@@ -22,6 +22,8 @@ final class CreateRolesTable extends AbstractMigration
         $table = $this->table('roles');
         $table->addColumn('name', 'string', ['limit' => 50, 'null' => false])
             ->addColumn('description', 'string', ['limit' => 255, 'null' => false])
+            ->addTimestamps()
+            ->addColumn('deleted_at', 'timestamp', ['null' => true, 'default' => null])
             ->create();
     }
     public function down(): void

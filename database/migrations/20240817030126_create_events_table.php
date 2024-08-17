@@ -25,8 +25,8 @@ final class CreateEventsTable extends AbstractMigration
             ->addColumn('description', 'text', ['null' => true])
             ->addColumn('location', 'string', ['limit' => 255])
             ->addColumn('event_date', 'datetime')
-            ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
-            ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP'])
+            ->addTimestamps()
+            ->addColumn('deleted_at', 'timestamp', ['null' => true, 'default' => null])
             ->addForeignKey('organizer_id', 'users', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
             ->create();
     }
