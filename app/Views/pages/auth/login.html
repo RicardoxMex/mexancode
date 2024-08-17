@@ -1,0 +1,20 @@
+<section>
+    <div class="login-container" x-data="Auth" x-init>
+        <h1>Sign In</h1>
+        <form x-on:submit.prevent="login" method="post">
+        
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input x-model="data.username" type="text" id="username" name="username">
+                <span x-cloak  x-show="validation?.password"  class="alert-text" x-text="validation?.username"></span>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input x-model="data.password" type="password" id="password" name="password">
+                <span x-cloak x-show="validation?.password" class="alert-text" x-text="validation?.password"></span>
+            </div>
+            <button class="btn button" type="submit">SIGN IN</button>
+            <a class="btn btn-opacity" href="/register">SIGN UP</a>
+        </form>
+    </div>
+</section>

@@ -1,10 +1,16 @@
 <?php
-use App\Controllers\Web\HomeController;
+
+use App\Controllers\Web\Auth\AuthController;
+
 use Pecee\SimpleRouter\SimpleRouter as Route;
-Route::csrfVerifier(new Core\Middlewares\CsrfVerifier());
+
+use App\Controllers\Web\HomeController;
 
 
-Route::get("/", [HomeController::class,"index"])->name("home");
-Route::post('/users', [HomeController::class, 'store'])->name('users');
+
+Route::get('/', [HomeController::class,"index"])->name("home");
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+
 
 

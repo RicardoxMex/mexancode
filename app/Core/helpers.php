@@ -86,3 +86,33 @@ function csrf_token(): ?string
 
     return null;
 }
+
+function validateRequest(array $validationRules): mixed
+{
+    $request = input()->all();
+    $gump = new GUMP();
+    GUMP::add_validator("valid_password", function ($field, $input, $param = null) {
+        // Validamos que contenga al menos una mayúscula, un número y un carácter especial
+        if (
+            preg_match('/[A-Z]/', $input[$field]) &&    // Al menos una letra mayúscula
+            preg_match('/[0-9]/', $input[$field]) &&    // Al menos un número
+            preg_match('/[\W]/', $input[$field])
+        ) {     // Al menos un carácter especial (\W busca todo lo que no es letra ni número)
+            return true;
+        }
+        return false;
+    }, "The {field} must contain at least one uppercase letter, one number, and one special character.");
+    
+    $gump->validation_rules($validationRules);
+    $gump->run($request);
+
+
+
+    if ($gump->is_valid($request, $validationRules) === true) {
+        return true;
+    }
+    if (request()->getUrl()->contains("/api")) {
+        response()->json($gump->get_errors_array());
+    }
+    return false;
+}

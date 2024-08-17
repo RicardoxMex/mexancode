@@ -21,4 +21,8 @@ class HomeController{
         $resquests = request();
         var_dump($resquests->getInputHandler()->value('username'));
     }
+
+    public function update() : void {
+        echo'test api';
+    }
 }
