@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateUserRolesTable extends AbstractMigration
+final class CreateEventRolesTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -19,19 +19,21 @@ final class CreateUserRolesTable extends AbstractMigration
      */
     public function up(): void
     {
-        $table = $this->table('user_roles');
+        $table = $this->table('event_roles');
         $table
+            ->addColumn('event_id', 'integer', ["signed" => false])
             ->addColumn('user_id', 'integer', ["signed" => false])
             ->addColumn('role_id', 'integer', ["signed" => false])
             ->addColumn('assigned_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addTimestamps()
             ->addColumn('deleted_at', 'timestamp', ['null' => true, 'default' => null])
+            ->addForeignKey('event_id', 'events', 'id', ['delete' => 'CASCADE'])
             ->addForeignKey('user_id', 'users', 'id', ['delete' => 'CASCADE'])
             ->addForeignKey('role_id', 'roles', 'id', ['delete' => 'CASCADE'])
             ->create();
     }
     public function down(): void
     {
-        $this->table("table")->drop()->save();
+        $this->table("event_roles")->drop()->save();
     }
 }

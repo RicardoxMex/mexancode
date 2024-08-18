@@ -21,7 +21,7 @@ class CustomExceptionHandler implements IExceptionHandler
 
         if ($request->getUrl()->contains('/api')) {
 
-            response()->json([
+            response()->httpCode(500)->json([
                 'error' => $error->getMessage(),
                 'code' => $error->getCode(),
             ]);

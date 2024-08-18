@@ -4,7 +4,7 @@
     "config": {
         "preferred-install": "dist",
         "platform": {
-            "php":"8.2"
+            "php": "8.2"
         }
     },
     "autoload": {
@@ -14,7 +14,9 @@
         }
     },
     "scripts": {
-        "phinx": "vendor/bin/phinx"
+        "phinx": "vendor/bin/phinx",
+        "phinx-migrate": "vendor/bin/phinx migrate",
+        "phinx-seed": "vendor/bin/phinx seed:run"
     },
     "authors": [
         {

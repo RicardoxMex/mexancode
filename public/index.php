@@ -1,8 +1,9 @@
 <?php
+use Core\Session;
 require_once("../vendor/autoload.php");
 use Core\CoreBoot;
 use Core\Route;
-use Core\Views;
+Session::start();
 
 try {
     $core = new CoreBoot();

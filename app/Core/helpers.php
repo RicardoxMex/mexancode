@@ -102,17 +102,35 @@ function validateRequest(array $validationRules): mixed
         }
         return false;
     }, "The {field} must contain at least one uppercase letter, one number, and one special character.");
-    
+
+    GUMP::add_validator("not_empty", function ($field, $input, $param = null) {
+        return !empty(trim($input[$field]));
+    }, "The {field} is required");
+
     $gump->validation_rules($validationRules);
     $gump->run($request);
 
-
-
     if ($gump->is_valid($request, $validationRules) === true) {
         return true;
+    } else {
+        if (request()->getUrl()->contains("/api")) {
+            response()->httpCode(409)->json($gump->get_errors_array());
+        }
+        return false;
     }
-    if (request()->getUrl()->contains("/api")) {
-        response()->json($gump->get_errors_array());
-    }
-    return false;
+}
+
+function isAuth(): bool
+{
+    return true;
+}
+
+function isAdmin(): bool
+{
+    return true;
+}
+
+function getRole(): ?string
+{
+
 }

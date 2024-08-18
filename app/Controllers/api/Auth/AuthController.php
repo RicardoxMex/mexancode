@@ -2,6 +2,7 @@
 namespace App\Controllers\Api\Auth;
 
 use App\Models\User;
+use Core\Session;
 
 class AuthController
 {
@@ -16,6 +17,12 @@ class AuthController
             response()->httpCode(401)->json(["message" => "Invalid credentials"]);
         
         if (password_verify($_password, $_user->password)) {
+            Session::setSession('user', [
+                'id'=>$_user->id,
+                'name' => $_user->first_name . ' ' .$_user->last_name,
+                'username' => $_user->username,
+                'email' => $_user->email,
+            ]);
             response()->httpCode(200)->json(["message" => "Authentication successful"]);
         }
     }
@@ -35,14 +42,14 @@ class AuthController
             $_email_exist = User::where('email', '=', $_email)->exists();
 
             if (!$_username_exist && !$_email_exist) {
-                User::create([
+                $_user = User::create([
                     'first_name' => $_first_name,
                     'last_name' => $_last_name,
                     'username' => $_username,
                     'email' => $_email,
                     'password' => password_hash($_password, PASSWORD_DEFAULT),
                 ]);
-
+                
                 response()->httpCode(200)->json([
                     'message' => 'User created susscesfull',
                 ]);

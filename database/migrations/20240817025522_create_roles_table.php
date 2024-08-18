@@ -24,6 +24,7 @@ final class CreateRolesTable extends AbstractMigration
             ->addColumn('description', 'string', ['limit' => 255, 'null' => false])
             ->addTimestamps()
             ->addColumn('deleted_at', 'timestamp', ['null' => true, 'default' => null])
+            ->addIndex(['name'], ['unique' => true])
             ->create();
     }
     public function down(): void

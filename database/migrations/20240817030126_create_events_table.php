@@ -20,11 +20,11 @@ final class CreateEventsTable extends AbstractMigration
     public function up(): void
     {
         $table = $this->table('events');
-        $table->addColumn('organizer_id', 'integer', ["signed" => false])
-            ->addColumn('title', 'string', ['limit' => 255])
-            ->addColumn('description', 'text', ['null' => true])
-            ->addColumn('location', 'string', ['limit' => 255])
-            ->addColumn('event_date', 'datetime')
+        $table->addColumn('organizer_id', 'integer', ["signed" => false, 'null'=>false])
+            ->addColumn('title', 'string', ['limit' => 255, 'null'=>false])
+            ->addColumn('description', 'text', ['null' => false])
+            ->addColumn('location', 'string', ['limit' => 255, 'null'=>false])
+            ->addColumn('event_date', 'datetime', ['null'=> false])
             ->addTimestamps()
             ->addColumn('deleted_at', 'timestamp', ['null' => true, 'default' => null])
             ->addForeignKey('organizer_id', 'users', 'id', ['delete' => 'CASCADE', 'update' => 'NO_ACTION'])
