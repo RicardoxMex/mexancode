@@ -84,4 +84,8 @@ class User extends Model
     public function events(){
         return $this->hasMany(Event::class, 'organizer_id');
     }
+
+    public function guests() {
+        return $this->hasMany(Guest::class);
+    }
 }
