@@ -14,14 +14,20 @@ export function Auth() {
         data: {
             username: '',
             password: '',
-            csrf:''
+        },
+        data_register: {
+            first_name:'',
+            last_name:'',
+            username: '',
+            password: '',
+            password_confirmation:''
         },
         validation: [],
         init() {
 
         },
         login(e) {
-            console.log()
+            console.log('holas')
             var header = {
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,21 +37,56 @@ export function Auth() {
                 body: JSON.stringify(this.data)
             }
 
-            fetch('http://192.168.3.2/api/register', header)
+            fetch('http://192.168.3.2/api/auth/login', header)
                 .then(data => {
                     this.status_code = data.status
                     return data.json()
                 })
                 .then((response) => {
                     if (this.status_code === 200) {
-                        //window.location.href = "/";
-                        // this.validation = [];
+                        this.validation = [];
+                        window.location.href = "/";
                     }
                     if (this.status_code === 401) {
                         Alpine.store('Toast').show('error', response.error);
                     }
                     if (this.status_code === 400) {
-                        this.validation = response.error
+                        this.validation = response.errors
+                    }
+                    console.log(this.status_code, response)
+                }).catch((error) => {
+                    console.error(this.status_code)
+                });
+        },
+        register(e) {
+            console.log('holas')
+            var header = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN':getCookie('CSRF-TOKEN')
+                },
+                method: 'POST',
+                body: JSON.stringify(this.data_register)
+            }
+
+            fetch('http://192.168.3.2/api/auth/register', header)
+                .then(data => {
+                    this.status_code = data.status
+                    return data.json()
+                })
+                .then((response) => {
+                    if (this.status_code === 200) {
+                        this.validation = [];
+                        window.location.href = "/";
+                    }
+                    if (this.status_code === 401) {
+                        //Alpine.store('Toast').show('error', response.error);
+                    }
+                    if (this.status_code === 400) {
+                        this.validation = response.errors
+                    }
+                    if (this.status_code === 409) {
+                        this.validation = response.errors
                     }
                     console.log(this.status_code, response)
                 }).catch((error) => {

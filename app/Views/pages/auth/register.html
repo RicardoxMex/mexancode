@@ -1,31 +1,46 @@
 <section>
-    <div class="login-container" x-data="Register" x-init>
+    <div class="login-container" x-data="Auth" x-init>
         <h1>Create Account</h1>
         <form x-init x-on:submit.prevent="register">
-            <div class="input-group">
-                <label for="username">Username:</label>
-                <input x-model="data.username" type="text" id="username" name="username">
-                <span class="alert-text" x-text="validation?.username"></span>
+            <div>
+                <div class="input-group">
+                    <label for="first_name">First Name:</label>
+                    <input x-model="data_register.first_name" type="text" id="first_name" name="first_name">
+                    <span class="alert-text" x-text="validation?.first_name"></span>
+                </div>
+                <div class="input-group">
+                    <label for="last_name">Last Name:</label>
+                    <input x-model="data_register.last_name" type="text" id="last_name" name="last_name">
+                    <span class="alert-text" x-text="validation?.last_name"></span>
+                </div>
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input x-model="data_register.username" type="text" id="username" name="username">
+                    <span class="alert-text" x-text="validation?.username"></span>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input x-model="data_register.email" type="text" id="email" name="email">
+                    <span class="alert-text" x-text="validation?.email"></span>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input x-model="data_register.password" type="password" id="password" name="password">
+                    <span class="alert-text" x-text="validation?.password"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input x-model="data_register.password_confirmation" type="password" id="confirm_password"
+                        name="confirm_password">
+                    <span class="alert-text" x-text="validation?.password_confirmation"></span>
+                </div>
             </div>
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input x-model="data.email" type="text" id="email" name="email">
-                <span class="alert-text" x-text="validation?.email"></span>
+
+            <div class="secction-buttons">
+                <button class="btn btn-primary" type="submit">SIGN UP</button>
+                <a class="btn btn-opacity" href="/login">SIGN IN</a>
             </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input x-model="data.password" type="password" id="password" name="password">
-                <span class="alert-text" x-text="validation?.password"></span>
-            </div>
-    
-            <div class="input-group">
-                <label for="confirm_password">Confirm Password:</label>
-                <input x-model="data.confirm_password" type="password" id="confirm_password" name="confirm_password">
-                <span class="alert-text" x-text="validation?.confirm_password"></span>
-            </div>
-            <button class="btn" type="submit">SIGN UP</button>
-            <br>
-            <a class="btn btn-opacity" href="/login">SIGN IN</a>
         </form>
     </div>
 </section>

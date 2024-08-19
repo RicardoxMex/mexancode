@@ -34,7 +34,7 @@ class User extends Model
 
     public static array $rules_login = [
         'username' => 'required',
-        'password' => 'required|min_len,8|valid_password',
+        'password' => 'required|min_len,8',
     ];
 
     /**

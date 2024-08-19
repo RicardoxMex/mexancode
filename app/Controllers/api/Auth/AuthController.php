@@ -61,11 +61,11 @@ class AuthController
                 ]);
             } elseif ($_username_exist) {
                 response()->httpCode(409)->json([
-                    'message' => 'email already exists',
+                    'message' => 'username already exists',
                 ]);
             } elseif ($_email_exist) {
                 response()->httpCode(409)->json([
-                    'message' => 'username already exists',
+                    'message' => 'email already exists ',
                 ]);
             }
 

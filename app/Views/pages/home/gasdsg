@@ -1,0 +1,224 @@
+<!-- Sidebar -->
+<aside class="sidebar">
+        <div class="logo">
+            <h2>Admin Dashboard</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Eventos</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#">Invitados</a></li>
+                <li><a href="#">Configuraciones</a></li>
+                <li><a href="#">Estadísticas</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar...">
+            </div>
+            <div class="user-info">
+                <span>Admin</span>
+                <img src="profile.jpg" alt="Admin" class="profile-img">
+            </div>
+        </div>
+
+        <!-- Dashboard Stats -->
+        <section class="dashboard-stats">
+            <div class="stat">
+                <h3>Total de Eventos</h3>
+                <p>120</p>
+            </div>
+            <div class="stat">
+                <h3>Total de Usuarios</h3>
+                <p>240</p>
+            </div>
+            <div class="stat">
+                <h3>Confirmaciones de Asistencia</h3>
+                <p>90</p>
+            </div>
+            <div class="stat">
+                <h3>Eventos Próximos</h3>
+                <p>10</p>
+            </div>
+        </section>
+
+        <!-- Table: Eventos -->
+        <section class="events-table">
+            <h2>Eventos Recientes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Evento</th>
+                        <th>Organizador</th>
+                        <th>Fecha</th>
+                        <th>Invitados Confirmados</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Evento Corporativo</td>
+                        <td>Juan Pérez</td>
+                        <td>20/08/2024</td>
+                        <td>45</td>
+                        <td><button class="btn-edit">Editar</button> <button class="btn-delete">Eliminar</button></td>
+                    </tr>
+                    <!-- Más filas de eventos -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2C3E50;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.sidebar .logo h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: block;
+}
+
+.sidebar nav ul li a.active {
+    background-color: #1ABC9C;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #ecf0f1;
+    padding: 20px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.topbar .search-bar input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.topbar .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.topbar .user-info span {
+    margin-right: 10px;
+}
+
+.topbar .user-info .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dashboard-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.dashboard-stats .stat {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.dashboard-stats .stat h3 {
+    margin-bottom: 10px;
+}
+
+.events-table {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.events-table h2 {
+    margin-bottom: 20px;
+}
+
+.events-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.events-table table th, .events-table table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.events-table table th {
+    background-color: #f7f7f7;
+}
+
+.events-table .btn-edit {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.events-table .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.events-table .btn-edit:hover, .events-table .btn-delete:hover {
+    opacity: 0.9;
+}
+
+    </style>

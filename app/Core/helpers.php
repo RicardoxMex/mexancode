@@ -114,7 +114,7 @@ function validateRequest(array $validationRules): mixed
         return true;
     } else {
         if (request()->getUrl()->contains("/api")) {
-            response()->httpCode(409)->json($gump->get_errors_array());
+            response()->httpCode(400)->json(['errors'=> $gump->get_errors_array()]);
         }
         return false;
     }
