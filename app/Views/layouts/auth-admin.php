@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <title>Tailwind CSS & Alpine.js Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $title . ' - ' . $GLOBALS["APP_NAME"] ?></title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -60,6 +61,19 @@
                 </a>
                 <!-- end::Menu link -->
                 <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Apps</p>
+
+                <a x-data="{ linkHover: false }" @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                    href="<?= url('admin.events') ?>"
+                    class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200"
+                        :class="linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                    </svg>
+                    <span class="ml-3 transition duration-200" :class="linkHover ? 'text-gray-100' : ''">
+                        Eventos
+                    </span>
+                </a>
                 <!-- start::Menu link -->
                 <div x-data="{ linkHover: false, linkActive: false }">
                     <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
@@ -180,23 +194,7 @@
                     <!-- end::Submenu -->
                 </div>
                 <!-- end::Menu link -->
-                <a 
-                        x-data="{ linkHover: false }"
-                        @mouseover = "linkHover = true"
-                        @mouseleave = "linkHover = false"
-                        href="./../messages.html"
-                        class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" :class="linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                        </svg>
-                        <span 
-                            class="ml-3 transition duration-200" 
-                            :class="linkHover ? 'text-gray-100' : ''"
-                        >
-                            Messages
-                        </span>
-                    </a>
+
             </nav>
             <!-- end::Navigation -->
         </aside>
@@ -290,148 +288,7 @@
                                             5 min ago
                                         </span>
                                     </a>
-                                    <!-- end::Submenu link -->
-                                    <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="#"
-                                        class="flex items-center justify-between py-4 px-3 hover:bg-gray-100 bg-opacity-20"
-                                        @mouseover="linkHover = true" @mouseleave="linkHover = false">
-                                        <div class="flex items-center">
-                                            <img src="./../../assets/img/profile.jpg" class="w-8 rounded-full">
-                                            <div class="text-sm ml-3">
-                                                <p class="text-gray-600 font-bold capitalize"
-                                                    :class=" linkHover ? 'text-primary' : ''">Maria sent you a message
-                                                </p>
-                                                <p class="text-xs">Hey there, how are you do...</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-bold">
-                                            30 min ago
-                                        </span>
-                                    </a>
-                                    <!-- end::Submenu link -->
-                                    <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="#"
-                                        class="flex items-center justify-between py-4 px-3 hover:bg-gray-100 bg-opacity-20"
-                                        @mouseover="linkHover = true" @mouseleave="linkHover = false">
-                                        <div class="flex items-center">
-                                            <svg class="w-8 h-8 bg-primary bg-opacity-20 text-primary px-1.5 py-0.5 rounded-full"
-                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                                </path>
-                                            </svg>
-                                            <div class="text-sm ml-3">
-                                                <p class="text-gray-600 font-bold capitalize"
-                                                    :class=" linkHover ? 'text-primary' : ''">Order Completed</p>
-                                                <p class="text-xs">Your order is completed</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-bold">
-                                            54 min ago
-                                        </span>
-                                    </a>
-                                    <!-- end::Submenu link -->
-                                    <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="#"
-                                        class="flex items-center justify-between py-4 px-3 hover:bg-gray-100 bg-opacity-20"
-                                        @mouseover="linkHover = true" @mouseleave="linkHover = false">
-                                        <div class="flex items-center">
-                                            <img src="./../../assets/img/profile.jpg" class="w-8 rounded-full">
-                                            <div class="text-sm ml-3">
-                                                <p class="text-gray-600 font-bold capitalize"
-                                                    :class=" linkHover ? 'text-primary' : ''">Maria sent you a message
-                                                </p>
-                                                <p class="text-xs">Hey there, how are you do...</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-bold">
-                                            1 hour ago
-                                        </span>
-                                    </a>
-                                    <!-- end::Submenu link -->
-                                    <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="#"
-                                        class="flex items-center justify-between py-4 px-3 hover:bg-gray-100 bg-opacity-20"
-                                        @mouseover="linkHover = true" @mouseleave="linkHover = false">
-                                        <div class="flex items-center">
-                                            <svg class="w-8 h-8 bg-primary bg-opacity-20 text-primary px-1.5 py-0.5 rounded-full"
-                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                                </path>
-                                            </svg>
-                                            <div class="text-sm ml-3">
-                                                <p class="text-gray-600 font-bold capitalize"
-                                                    :class=" linkHover ? 'text-primary' : ''">Order Completed</p>
-                                                <p class="text-xs">Your order is completed</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-bold">
-                                            15 hours ago
-                                        </span>
-                                    </a>
-                                    <!-- end::Submenu link -->
-                                    <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="#"
-                                        class="flex items-center justify-between py-4 px-3 hover:bg-gray-100 bg-opacity-20"
-                                        @mouseover="linkHover = true" @mouseleave="linkHover = false">
-                                        <div class="flex items-center">
-                                            <img src="./../../assets/img/profile.jpg" class="w-8 rounded-full">
-                                            <div class="text-sm ml-3">
-                                                <p class="text-gray-600 font-bold capitalize"
-                                                    :class=" linkHover ? 'text-primary' : ''">Maria sent you a message
-                                                </p>
-                                                <p class="text-xs">Hey there, how are you do...</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-bold">
-                                            12 day ago
-                                        </span>
-                                    </a>
-                                    <!-- end::Submenu link -->
-                                    <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="#"
-                                        class="flex items-center justify-between py-4 px-3 hover:bg-gray-100 bg-opacity-20"
-                                        @mouseover="linkHover = true" @mouseleave="linkHover = false">
-                                        <div class="flex items-center">
-                                            <svg class="w-8 h-8 bg-primary bg-opacity-20 text-primary px-1.5 py-0.5 rounded-full"
-                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                                </path>
-                                            </svg>
-                                            <div class="text-sm ml-3">
-                                                <p class="text-gray-600 font-bold capitalize"
-                                                    :class=" linkHover ? 'text-primary' : ''">Order Completed</p>
-                                                <p class="text-xs">Your order is completed</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-bold">
-                                            3 months ago
-                                        </span>
-                                    </a>
-                                    <!-- end::Submenu link -->
-                                    <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="#"
-                                        class="flex items-center justify-between py-4 px-3 hover:bg-gray-100 bg-opacity-20"
-                                        @mouseover="linkHover = true" @mouseleave="linkHover = false">
-                                        <div class="flex items-center">
-                                            <img src="./../../assets/img/profile.jpg" class="w-8 rounded-full">
-                                            <div class="text-sm ml-3">
-                                                <p class="text-gray-600 font-bold capitalize"
-                                                    :class=" linkHover ? 'text-primary' : ''">Maria sent you a message
-                                                </p>
-                                                <p class="text-xs">Hey there, how are you do...</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs font-bold">
-                                            10 months ago
-                                        </span>
-                                    </a>
-                                    <!-- end::Submenu link -->
+
                                 </div>
                                 <!-- end::Submenu content -->
                             </div>
@@ -547,9 +404,10 @@
 
             <!-- start:Page content -->
             <div class="h-full bg-gray-200 p-8">
-            <h4 class="text-xl font-semibold mb-4">Messages</h4>
+                <h4 class="text-xl font-semibold mb-4"><?= $title ?></h4>
+                <?= $child ?>
                 <div class="flex flex-col xl:flex-row space-y-12 xl:space-y-0 xl:space-x-12 bg-white px-4 py-8 rounded">
-                    <?= $child ?>
+
                 </div>
 
             </div>

@@ -10,6 +10,7 @@ use App\Controllers\Web\HomeController;
 
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/', [AdminController::class,"index"])->name("admin");
+    Route::get('/events', [AdminController::class,"events"])->name("admin.events");
 });
 
 Route::get('/', [HomeController::class,"index"])->name("home");

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   darkMode: 'selector',
@@ -18,6 +19,20 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    plugin(function({ addUtilities, theme }) {
+      const newUtilities = {
+          '.custom-scrollbar': {
+              '.custom-scrollbar::-webkit-scrollbar': { width: '6px' },
+              '.custom-scrollbar::-webkit-scrollbar-track': { background: theme('bg-secondary')},
+              '.custom-scrollbar::-webkit-scrollbar-thumb': { background: '#888' },
+              '.custom-scrollbar::-webkit-scrollbar-thumb:hover': {background: '#555'},
+          }
+      }
+
+      addUtilities(newUtilities, ['responsive', 'hover'])
+    })
+  ],
 }
 
