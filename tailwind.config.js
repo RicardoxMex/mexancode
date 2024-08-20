@@ -7,7 +7,9 @@ module.exports = {
     './*.html',
     './app/Views/pages/**/*.html',
     './app/Views/**/**/*.html',
-    './app/Views/**/**/*.php'
+    './app/Views/**/**/*.php',
+    './app/Views/pages/**/*.php',
+    './app/Views/pages/**/*.html'
   ],
   theme: {
     extend: {

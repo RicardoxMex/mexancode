@@ -13,18 +13,20 @@ class EventController implements IResourceController
         $_current_user = \Core\Session::getSession("user");
 
         if (isAdmin()) {
-            $_event = Event::orderBy('created_at', 'desc')->get();
-            return response()->json(['data' => $_event]);
+            $_event = Event::with('organizer')->withCount('guests')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+            return response()->json($_event);
         }
 
-        $_user = User::find($_current_user['id']);
+        $_user = User::with('events')->find($_current_user['id']);
         return response()->json(['data' => $_user->events()->get()]);
     }
     public function show($id)
     {
         $_current_user = \Core\Session::getSession("user");
         if (isAdmin()) {
-            $_event = Event::find($id);
+            $_event = Event::with('organizer','guests')->find($id);
             if (is_null($_event))
                 response()->httpCode(404)->json(['message' => 'event not found']);
             return response()->json(['role' => $_event]);

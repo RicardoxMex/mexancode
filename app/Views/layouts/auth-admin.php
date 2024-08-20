@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title . ' - ' . $GLOBALS["APP_NAME"] ?></title>
 
@@ -10,19 +11,16 @@
     <link rel="stylesheet" href="/css/tailwind.css">
 
     <style>
-        [x-cloak] {
-            display: none !important;
-        }
+        [x-cloak] { display: none !important; }
     </style>
 
     <!-- Scripts -->
-    <script defer src="https://unpkg.com/@alpinejs/collapse@3.4.2/dist/cdn.min.js"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <script defer src="/js/bundle.js"></script>
+    
 </head>
 
 <body>
-    <div x-data="{ 
+    <div x-cloak x-data="{ 
                 menuOpen: false, 
                 basicSignInModal: false,
                 basicSignUpModal: false,
@@ -62,7 +60,7 @@
                 <!-- end::Menu link -->
                 <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Apps</p>
 
-                <a x-data="{ linkHover: false }" @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                <a data-turbolinks x-data="{ linkHover: false }" @mouseover="linkHover = true" @mouseleave="linkHover = false"
                     href="<?= url('admin.events') ?>"
                     class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200"
@@ -403,13 +401,9 @@
             <!-- end::Topbar -->
 
             <!-- start:Page content -->
-            <div class="h-full bg-gray-200 p-8">
-                <h4 class="text-xl font-semibold mb-4"><?= $title ?></h4>
+            <div class="h-full bg-gray-200 sm:p-8">
+              
                 <?= $child ?>
-                <div class="flex flex-col xl:flex-row space-y-12 xl:space-y-0 xl:space-x-12 bg-white px-4 py-8 rounded">
-
-                </div>
-
             </div>
             <!-- end:Page content -->
         </div>

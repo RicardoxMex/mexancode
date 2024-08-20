@@ -9,12 +9,10 @@ class CoreBoot{
             $this->inicializeDatabase();
         }
         require_once $GLOBALS['DIR'].'/app/Core/helpers.php';
-        
-        /*$request = new Request();
-        $currentPage = $request->getParameters('page', 1);
+        $currentPage = input('page',1);
         Paginator::currentPageResolver(function () use ($currentPage) {
             return $currentPage;
-        });*/
+        });
     }
 
     private function inicializaEnv(): void{

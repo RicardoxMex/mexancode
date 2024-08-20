@@ -74,4 +74,8 @@ class Event extends Model
     {
         return $this->roles()->wherePivot('user_id', $user->id)->detach($role->id);
     }
+
+    public function guests(){
+        return $this->hasMany(Guest::class);
+    }
 }

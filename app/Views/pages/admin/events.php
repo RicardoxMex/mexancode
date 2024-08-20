@@ -1,5 +1,7 @@
 <!-- start::Advance Table Filters -->
-<div x-data="{ filter: false }" class="bg-white rounded-lg px-8 py-6 overflow-x-scroll custom-scrollbar p-4">
+<script>  
+</script>
+<div x-data="{ filter: false }" class="h-full md:h-min-[720px] bg-white rounded-lg p-2 md:px-8 md:py-6 overflow-x-scroll custom-scrollbar">
     <h4 class="text-xl font-semibold">Advance Table Filters</h4>
     <div class="mt-8 mb-3 flex flex-col md:flex-row items-start md:items-center md:justify-between">
         <div class="flex items-center justify-center space-x-4">
@@ -31,7 +33,8 @@
             </form>
         </div>
     </div>
-    <div x-show="filter" x-collapse.duration.300ms>
+
+    <div x-cloak x-show="filter" x-collapse.duration.300ms>
         <div class="mb-2 py-4 bg-gray-200 px-8 rounded-lg">
             <h5 class="underline">Filter Results</h5>
             <form class="py-2">
@@ -80,27 +83,69 @@
             </form>
         </div>
     </div>
-    <div x-data="eventTable()">
-        <table class="w-full whitespace-nowrap mb-8">
-            <thead class="bg-secondary text-gray-100 font-bold">
+
+
+    <div x-data="EventTable" x-init="">
+    <p x-text="events.length"></p>
+        <div x-show="false" class="animate-pulse">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="">
+                    <tr>
+                        <th class="px-6 py-5 bg-secondary rounded h-6 w-full"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <!-- Repite este bloque para simular varias filas -->
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-100 rounded h-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-200 rounded h-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-100 rounded h-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-200 rounded h-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-100 rounded h-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-200 rounded h-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-100 rounded h-6"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-5 bg-gray-200 rounded h-6"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <table x-show="$store.eventsData.events.length > 0" class="w-full whitespace-nowrap mb-8" data-turbolinks>
+            <thead class="bg-secondary text-gray-100 font-bold text-center">
                 <tr>
                     <td class="py-2 pl-2">ID</td>
                     <td class="py-2 pl-2" style="min-width: 150px;">Título</td>
-                    <td class="py-2 pl-2">Organizador</td>
-                    <td class="py-2 pl-2">Ubicación</td>
-                    <td class="py-2 pl-2">Invitados Confirmados</td>
-                    <td class="py-2 pl-2"></td>
+                    <td class="py-2 pl-2 ">Organizador</td>
+                    <td class="py-2 pl-2 hidden md:table-cell">Ubicación</td>
+                    <td class="py-2 pl-2 hidden sm:table-cell">Invitados</td>
+                    <td class="py-2 pl-2 hidden sm:table-cell">fecha del evento</td>
+                    <td class="py-2 pl-2 w-[400px]"></td>
                 </tr>
             </thead>
             <tbody class="text-sm">
-                <template x-for="(event, index) in events" :key="event.id">
+                <template x-data x-for="(event, index) in $store.eventsData.events" :key="event.id">
                     <tr :class="index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'">
                         <td class="py-3 pl-2" x-text="event.id"></td>
-                        <td class="py-3 pl-2 capitalize truncate" style="max-width: 150px; text-wrap:wrap;" x-text="event.title"></td>
+                        <td class="py-3 pl-2 capitalize truncate" style="max-width: 150px; text-wrap:wrap;"
+                            x-text="event.title"></td>
                         <td class="py-3 pl-2" x-text="event.organizer"></td>
-                        <td class="py-3 pl-2" x-text="event.location"></td>
-                        <td class="py-3 pl-2" x-text="event.confirmedGuests"></td>
-                        <td class="py-3 pl-2 flex items-center space-x-2">
+                        <td class="py-3 pl-2 hidden md:table-cell" x-text="event.location"></td>
+                        <td class="py-3 pl-2 text-center hidden sm:table-cell" x-text="event.confirmedGuests"></td>
+                        <td class="py-3 pl-2 text-center hidden sm:table-cell" x-text="event.dateEvent"></td>
+                        <td class="py-3 pl-2 flex items-center space-x-2 ">
                             <a href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="h-4 w-4 text-primary hover:text-primary-dark" fill="none" viewBox="0 0 24 24"
@@ -131,33 +176,29 @@
                 </template>
             </tbody>
         </table>
+        <div class="flex items-center justify-center mt-4">
+        <template x-for="link in $store.eventsData.links" :key="link.label">
+                <button
+                x-on:click="loadPaginete(link.url)"
+                    class="text-gray-400 text-lg hover:bg-gray-200 px-3 py-0.5 border border-gray-300"
+                    x-bind:class="link.active ? 'bg-gray-200' : ''" data-turbolinks>
+                    <span x-text="link.label">Previous</span>
+                </button>
+            </template>
+            <template >
+                <a :href="!link.url ? '': '<?= url('admin.events') ?>' + link.url.replace('/','')"
+                    class="text-gray-400 text-lg hover:bg-gray-200 px-3 py-0.5 border border-gray-300"
+                    x-bind:class="link.active ? 'bg-gray-200' : ''" data-turbolinks>
+                    <span x-text="link.label">Previous</span>
+                </a>
+            </template>
+        </div>
     </div>
 
 
 
     <script>
-        function eventTable() {
-            return {
-                events: [
-                    { id: 1, title: 'Evento 1', organizer: 'Juan Pérez', location: 'Sala A', confirmedGuests: 25 },
-                ],
-                init() {
-                    fetch('http://192.168.3.2/api/events')
-                        .then(res => res.json())
-                        .then(data => {
-                            this.events = data.data.map(event => ({
-                                id: event.id,
-                                title: event.title,
-                                organizer: event.organizer_id,
-                                location: event.location,
-                                confirm: 10
-                            }))
-                        })
 
-                    console.log()
-                }
-            }
-        }
     </script>
 
 </div>
