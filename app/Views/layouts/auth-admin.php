@@ -1,22 +1,25 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
     <meta charset="utf-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pagina para administrar eventos">
     <title><?= $title . ' - ' . $GLOBALS["APP_NAME"] ?></title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/tailwind.css">
 
     <style>
-        [x-cloak] { display: none !important; }
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
 
     <!-- Scripts -->
     <script defer src="/js/bundle.js"></script>
-    
+
 </head>
 
 <body>
@@ -26,14 +29,14 @@
                 basicSignUpModal: false,
                 advanceSignInModal: false,
                 advanceSignUpModal: false,
-            }" class="flex min-h-screen custom-scrollbar">
+            }" class="flex  h-screen  custom-scrollbar">
         <!-- start::Black overlay -->
         <div :class="menuOpen ? 'block' : 'hidden'" @click="menuOpen = false"
             class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
         <!-- end::Black overlay -->
 
         <aside :class="menuOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-            class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 bg-secondary overflow-y-auto lg:translate-x-0 lg:inset-0 custom-scrollbar">
+            class="fixed z-50 inset-y-0 left-0 w-64 transition duration-300 bg-secondary overflow-y-auto lg:translate-x-0 lg:inset-0 custom-scrollbar">
             <!-- start::Logo -->
             <div class="flex items-center justify-center bg-black bg-opacity-30 h-16">
                 <h1 class="text-gray-100 text-lg font-bold uppercase tracking-widest">
@@ -60,8 +63,8 @@
                 <!-- end::Menu link -->
                 <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Apps</p>
 
-                <a data-turbolinks x-data="{ linkHover: false }" @mouseover="linkHover = true" @mouseleave="linkHover = false"
-                    href="<?= url('admin.events') ?>"
+                <a data-turbolinks x-data="{ linkHover: false }" @mouseover="linkHover = true"
+                    @mouseleave="linkHover = false" href="<?= url('events') ?>"
                     class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200"
                         :class="linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -200,11 +203,11 @@
 
         <div class="lg:pl-64 w-full flex flex-col">
             <!-- start::Topbar -->
-            <div class="flex flex-col">
-                <header class="flex justify-between items-center h-16 py-4 px-6 bg-white">
+            <div class="flex flex-col fixed top-0 left-0 right-0 shadow-md z-30">
+                <header class="flex justify-between items-center h-16 py-4 px-6 bg-primary-dark">
                     <!-- start::Mobile menu button -->
                     <div class="flex items-center">
-                        <button @click="menuOpen = true"
+                        <button @click="menuOpen = true" aria-label="Menu"
                             class="text-gray-500 hover:text-primary focus:outline-none lg:hidden transition duration-200">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -221,8 +224,8 @@
                         <form class="relative">
                             <input type="text" placeholder="Search..."
                                 class="w-48 lg:w-72 bg-gray-200 text-sm py-2 pl-4 rounded-lg focus:ring-0 focus:outline-none">
-                            <button class="absolute right-2 top-2.5">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            <button aria-label="Search" class="absolute right-2 top-2.5">
+                                <svg class="w-[24px] h-[24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -235,8 +238,8 @@
                         <div x-data="{ linkActive: false }" class="relative mx-6">
                             <!-- start::Main link -->
                             <div @click="linkActive = !linkActive" class="cursor-pointer flex">
-                                <svg class="w-6 h-6 cursor-pointer hover:text-primary" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-6 h-6 cursor-pointer text-gray-300 hover:text-white" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                     </path>
@@ -298,7 +301,7 @@
                         <div x-data="{ linkActive: false }" class="relative">
                             <!-- start::Main link -->
                             <div @click="linkActive = !linkActive" class="cursor-pointer">
-                                <img src="./../../assets/img/profile.jpg" class="w-10 rounded-full">
+                                <img width="44px" height="44px" src="/img/profile.webp" alt="img profile" class="rounded-full">
                             </div>
                             <!-- end::Main link -->
 
@@ -308,7 +311,7 @@
                                 <!-- start::Submenu content -->
                                 <div class="bg-white rounded">
                                     <!-- start::Submenu link -->
-                                    <a x-data="{ linkHover: false }" href="./../profile.html"
+                                    <a x-data="{ linkHover: false }" href="<?= url('profile') ?>"
                                         class="flex items-center justify-between py-2 px-3 hover:bg-gray-100 bg-opacity-20"
                                         @mouseover="linkHover = true" @mouseleave="linkHover = false">
                                         <div class="flex items-center">
@@ -401,10 +404,13 @@
             <!-- end::Topbar -->
 
             <!-- start:Page content -->
-            <div class="h-full bg-gray-200 sm:p-8">
-              
-                <?= $child ?>
+
+            <div x-data="General" class="h-full bg-gray-200 mt-16 overflow-y-auto ">
+                <main class="h-full p-0 sm:p-2 md:p-6 lg:p-10 xl:p-14">
+                    <?= $child ?>
+                </main>
             </div>
+
             <!-- end:Page content -->
         </div>
     </div>

@@ -18,5 +18,5 @@ Route::post('/events/remove-role', [EventRoleController::class, 'removeRole'])->
 
 
 Route::resource('/roles', RoleController::class)->name('roles');
-Route::resource('/events', EventController::class)->name('events');
+Route::resource('/events', EventController::class);
 Route::resource('/guests', GuestController::class)->name('guests');

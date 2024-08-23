@@ -10,23 +10,33 @@ class EventController implements IResourceController
 
     public function index()
     {
-        $_current_user = \Core\Session::getSession("user");
-
-        if (isAdmin()) {
-            $_event = Event::with('organizer')->withCount('guests')
+        $filter_event_name = (string)input("event_name");
+        $filter_event_id = input("event_id");
+        $filter_event_date = input("event_date");
+        $filter_event_status = input("event_status");
+        
+        $_event = Event::with('organizer')->withCount('guests')
+            ->when($filter_event_name, function ($query, $filter_event_name) {
+                return $query->where('title', 'like', "%{$filter_event_name}%");
+            })
+            ->when($filter_event_id, function ($query, $filter_event_id) {
+                return $query->where('id', $filter_event_id);
+            })
+            ->when($filter_event_date, function ($query, $filter_event_date) {
+                return $query->whereDate('event_date', $filter_event_date);
+            })
+            ->when($filter_event_status, function ($query, $filter_event_status) {
+                return $query->where('status', $filter_event_status);
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-            return response()->json($_event);
-        }
-
-        $_user = User::with('events')->find($_current_user['id']);
-        return response()->json(['data' => $_user->events()->get()]);
+        return response()->json($_event);
     }
     public function show($id)
     {
         $_current_user = \Core\Session::getSession("user");
         if (isAdmin()) {
-            $_event = Event::with('organizer','guests')->find($id);
+            $_event = Event::with('organizer', 'guests')->find($id);
             if (is_null($_event))
                 response()->httpCode(404)->json(['message' => 'event not found']);
             return response()->json(['role' => $_event]);
@@ -120,7 +130,7 @@ class EventController implements IResourceController
             if (is_null($_event))
                 response()->httpCode(404)->json(['message' => 'event not found']);
             $_event->delete();
-        }else{
+        } else {
             $_event = Event::where('organizer_id', $_current_user['id'])
                 ->where('id', $id)->first();
 

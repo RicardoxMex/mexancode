@@ -8,16 +8,23 @@ class AdminController {
         Views::setLayout("auth-admin");
     }
     public function index(){ 
+        
         Views::setTitle("Admin");
         Views::setViewPath('admin.index');
         Views::render();
     }
 
     public function events(){
-        $_events = Event::all();
-        Views::setTitle("Admin");
-        Views::setViewPath('admin.events');
-        Views::setData(['events'=> $_events]);
+        Views::setTitle("Events");
+        Views::setViewPath('admin.events.index');
+        Views::render();
+    }
+
+    public function event($id){
+        $event = Event::with('organizer', 'guests')->find($id);
+        Views::setTitle($id);
+        Views::setViewPath('admin.events.show');
+        Views::setData(['event'=> $event]);
         Views::render();
     }
 }

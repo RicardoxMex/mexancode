@@ -81,11 +81,18 @@ class User extends Model
         $this->roles()->detach($role);
     }
 
-    public function events(){
+    public function events()
+    {
         return $this->hasMany(Event::class, 'organizer_id');
     }
 
-    public function guests() {
+    public function guests()
+    {
         return $this->hasMany(Guest::class);
+    }
+
+    public function fullName(): string
+    {
+        return (string) $this->first_name . ' ' . $this->last_name;
     }
 }
